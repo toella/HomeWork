@@ -1,25 +1,51 @@
-// import logo from "./logo.svg";
-import "./App.css";
-import { Sidebar, Smallbox, Maincontent } from "./welcome.js"
+import React from 'react';
+import div1 from './div1';
 
-
-
-
-function App() {
-  return (
-    <div className='App'>
-      <Sidebar />
-      <Smallbox title='Reviews' data1='1,281' />
-      <Smallbox title='Average Rating' data1='4.6' />
-      <Smallbox
-        title='Sentiment Analysis'
-        data1='960'
-        data2='122'
-        data3='321'
-      />
-      <Maincontent title='Website Visitors' data='821' />
-    </div>
-  );
+class app extends React.Component{
+  render(){
+    return(
+      <div>
+        <div1
+          text={this.props.text}
+          />
+      </div>
+    );
+  }
 }
-
 export default App;
+
+// export default class App extends Component{
+//   state = {
+//     tardis: {
+//       name: 'Time and Relative Dimension in Space',
+//       caps: false,}
+//     }
+
+//   changeIt = (text) => {
+//     if (this.state.tardis.caps) {
+//       this.setState({
+//         tardis: {
+//           name: text.toLowerCase(),
+//           caps: false
+//         }
+//       })
+//     } else {
+//       this.setState({
+//         tardis: {
+//           name: text.toUpperCase(),
+//           caps: true
+//         }
+//       })
+//     }
+//   }
+//   render(){
+//     return(
+//       <div>
+//         <h3 onClick={() => this.changeIt(this.state.tardis.name)}>{this.state.tardis.name}</h3>
+        
+//       </div>
+//     )
+//   }
+  
+// }
+// export default App
