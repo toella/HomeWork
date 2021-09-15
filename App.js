@@ -1,51 +1,77 @@
-import React from 'react';
-import div1 from './div1';
+import React from "react";
 
-class app extends React.Component{
-  render(){
-    return(
+
+
+
+
+// show a  list of items 
+// add item function
+// delete item function
+// complete item remove from list function b 
+export default class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [], text: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  render() {
+    return (
       <div>
-        <div1
-          text={this.props.text}
+        <h3>TODO</h3>
+        <TodoList items={this.state.items} />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="new-todo">dcf AZaszswefcv cf¸e
+            What needs to be done?
+          </label>
+          <input
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
           />
+          <button>
+            Add #{this.state.items.length + 1}
+          </button>
+        </form>
       </div>
     );
   }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text.length === 0) {
+      return;
+    }
+    const newItem = {
+      text: this.state.text,
+      id: Date.now()
+    };
+    this.setState(state => ({
+      items: state.items.concat(newItem),
+      text: ''
+    }));
+  }
 }
-export default App;
 
-// export default class App extends Component{
-//   state = {
-//     tardis: {
-//       name: 'Time and Relative Dimension in Space',
-//       caps: false,}
-//     }
+class TodoList extends React.Component {
+  render() {
+    return (
+      <ul>
+        {this.props.items.map(item => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
+    );
+  }
+}
 
-//   changeIt = (text) => {
-//     if (this.state.tardis.caps) {
-//       this.setState({
-//         tardis: {
-//           name: text.toLowerCase(),
-//           caps: false
-//         }
-//       })
-//     } else {
-//       this.setState({
-//         tardis: {
-//           name: text.toUpperCase(),
-//           caps: true
-//         }
-//       })
-//     }
-//   }
-//   render(){
-//     return(
-//       <div>
-//         <h3 onClick={() => this.changeIt(this.state.tardis.name)}>{this.state.tardis.name}</h3>
-        
-//       </div>
-//     )
-//   }
-  
-// }
-// export default App
+// ReactDOM.render(
+//   <TodoApp />,
+//   document.getElementById('todos-example')
+// );
+// default export 
